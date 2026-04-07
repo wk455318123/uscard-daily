@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>美卡每日信息简报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,"Hiragino Sans GB","PingFang SC","Microsoft YaHei",sans-serif}
+.hd{background:#161b22;border-bottom:3px solid #e94560;padding:20px 24px;position:sticky;top:0;z-index:100}
+.hd h1{color:#e94560;font-size:22px;margin-bottom:6px}
+.hd .sub{color:#8b949e;font-size:13px}
+.date-bar{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.date-btn{background:#21262d;border:1px solid #30363d;color:#8b949e;padding:4px 12px;border-radius:14px;font-size:12px;cursor:pointer}
+.date-btn:hover{border-color:#58a6ff;color:#58a6ff}
+.date-btn.on{background:#1f6feb33;border-color:#58a6ff;color:#58a6ff}
+.sts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.st{background:#21262d;padding:3px 10px;border-radius:12px;font-size:11px;color:#8b949e}
+.ctl{background:#161b22;padding:10px 24px;border-bottom:1px solid #21262d;display:flex;gap:8px;flex-wrap:wrap;align-items:center;position:sticky;top:105px;z-index:99}
+.sr{background:#0d1117;border:1px solid #30363d;color:#c9d1d9;padding:6px 12px;border-radius:6px;font-size:13px;width:180px}
+.sr:focus{border-color:#58a6ff;outline:none}
+.fb{background:#21262d;border:1px solid #30363d;color:#8b949e;padding:5px 12px;border-radius:16px;font-size:12px;cursor:pointer}
+.fb:hover{border-color:#58a6ff;color:#58a6ff}
+.fb.on{background:#1f6feb33;border-color:#58a6ff;color:#58a6ff}
+.tb{background:#21262d;border:1px solid #30363d;color:#8b949e;padding:5px 12px;border-radius:16px;font-size:12px;cursor:pointer}
+.tb:hover{border-color:#d29922;color:#d29922}
+.tb.on{background:#d2992233;border-color:#d29922;color:#d29922}
+.cnt{padding:8px 24px;color:#484f58;font-size:12px;border-bottom:1px solid #21262d}
+.ls{padding:8px 24px}
+.it{background:#161b22;border:1px solid #21262d;border-radius:8px;margin-bottom:6px;cursor:pointer}
+.it:hover{border-color:#30363d}
+.ih{padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.tg{font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.t-论坛{background:#f8514933;color:#f85149;border:1px solid #f8514966}
+.t-星球{background:#d2992233;color:#d29922;border:1px solid #d2992266}
+.t-博客{background:#3fb95033;color:#3fb950;border:1px solid #3fb95066}
+.t-公号{background:#58a6ff33;color:#58a6ff;border:1px solid #58a6ff66}
+.t-红书{background:#f778ba33;color:#f778ba;border:1px solid #f778ba66}
+.t-群聊{background:#7ee78733;color:#7ee787;border:1px solid #7ee78766}
+.tt{font-size:14px;color:#c9d1d9;flex:1;line-height:1.5}
+.mt{font-size:11px;color:#484f58;margin-top:2px}
+.ar{color:#484f58;font-size:18px;flex-shrink:0;transition:transform .2s;user-select:none}
+.it.ex .ar{transform:rotate(90deg)}
+.dt{display:none;padding:0 14px 14px;border-top:1px solid #21262d}
+.it.ex .dt{display:block;padding-top:12px}
+.dx{font-size:13px;color:#8b949e;line-height:1.7;white-space:pre-wrap;word-break:break-all}
+.dl{display:inline-block;margin-top:10px;margin-right:8px;color:#58a6ff;font-size:12px;text-decoration:none;background:#21262d;padding:4px 12px;border-radius:6px;border:1px solid #30363d}
+.dl:hover{text-decoration:underline;border-color:#58a6ff}
+.hl{background:#d2992244;padding:1px 2px;border-radius:2px}
+.sep{color:#30363d;margin:0 4px}
+.loading{text-align:center;padding:60px;color:#484f58;font-size:14px}
+.footer{text-align:center;padding:20px;color:#30363d;font-size:11px;border-top:1px solid #21262d;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="hd">
+<h1>美卡每日信息简报</h1>
+<div class="sub">6大渠道跨平台整合 | 论坛 · 群聊 · 知识星球 · 博客 · 公众号 · 小红书</div>
+<div class="date-bar" id="dates"></div>
+<div class="sts" id="stats"></div>
+</div>
+<div class="ctl">
+<input class="sr" type="text" placeholder="搜索..." id="q">
+<button class="fb on" data-c="all">全部</button>
+<button class="fb" data-c="美卡论坛">论坛</button>
+<button class="fb" data-c="微信群聊">群聊</button>
+<button class="fb" data-c="知识星球">星球</button>
+<button class="fb" data-c="美卡博客">博客</button>
+<button class="fb" data-c="公众号">公众号</button>
+<button class="fb" data-c="小红书">小红书</button>
+<span class="sep">|</span>
+<button class="tb" data-t="信用卡">信用卡</button>
+<button class="tb" data-t="航空">航空里程</button>
+<button class="tb" data-t="酒店">酒店旅行</button>
+<button class="tb" data-t="银行">银行理财</button>
+<button class="tb" data-t="风控">风控预警</button>
+</div>
+<div class="cnt" id="cnt"></div>
+<div class="ls" id="ls"><div class="loading">加载中...</div></div>
+<div class="footer">Powered by Claude Code + OpenClaw | 数据每日 10:00 / 22:00 自动更新</div>
+
+<script>
+var CM={"美卡论坛":"论坛","知识星球":"星球","美卡博客":"博客","公众号":"公号","小红书":"红书","微信群聊":"群聊"};
+var TK={"信用卡":["信用卡","美卡","开卡","amex","chase","citi","boa","nll","返现","积分","bonus","offer","platinum","gold","aspire","csr","bilt","refer"],"航空":["里程","航空","united","delta","alaska","mile","fly","aeroplan","商务舱","机票","航班","南航","国航"],"酒店":["酒店","hotel","hyatt","hilton","marriott","ihg","凯悦","希尔顿","万豪","雅高","度假","fhr","resort","club med"],"银行":["银行","bank","checking","saving","开户","sofi","chime","报税","理财","投资","plaid"],"风控":["封","block","盗刷","风控","4506","kyc","拒","冻结","风险","预警"]};
+
+var D=[],aCh="all",aTp="",sQ="",curDate="";
+
+// 发现可用的日期文件
+async function init(){
+  // 尝试加载 manifest（列出所有可用日期）
+  var available=[];
+  try{
+    var r=await fetch("data/manifest.json");
+    if(r.ok) available=await r.json();
+  }catch(e){}
+
+  // fallback: 尝试最近7天
+  if(available.length===0){
+    var today=new Date();
+    for(var i=0;i<7;i++){
+      var d=new Date(today);d.setDate(d.getDate()-i);
+      var ds=d.toISOString().slice(0,10);
+      try{
+        var r=await fetch("data/"+ds+".json");
+        if(r.ok)available.push(ds);
+      }catch(e){}
+    }
+  }
+
+  if(available.length===0){
+    document.getElementById("ls").innerHTML='<div class="loading">暂无数据。如果是本地打开，请用: python3 -m http.server 8080</div>';
+    return;
+  }
+
+  // 渲染日期按钮
+  var dh=available.map(function(ds,i){
+    return '<button class="date-btn'+(i===0?' on':'')+'" data-d="'+ds+'">'+ds.slice(5)+'</button>';
+  }).join("");
+  document.getElementById("dates").innerHTML=dh;
+
+  // 加载最新日期
+  await loadDate(available[0]);
+}
+
+async function loadDate(ds){
+  curDate=ds;
+  document.querySelectorAll(".date-btn").forEach(function(b){
+    b.classList.toggle("on",b.dataset.d===ds);
+  });
+  document.getElementById("ls").innerHTML='<div class="loading">加载 '+ds+' ...</div>';
+
+  try{
+    var r=await fetch("data/"+ds+".json");
+    D=await r.json();
+
+    // 统计
+    var ch={};
+    D.forEach(function(i){ch[i.channel]=(ch[i.channel]||0)+1;});
+    var sh=Object.entries(ch).map(function(e){return '<span class="st">'+CM[e[0]]||e[0]+' '+e[1]+'</span>';}).join("");
+    sh+='<span class="st">共 '+D.length+' 条</span>';
+    document.getElementById("stats").innerHTML=sh;
+
+    R();
+  }catch(e){
+    document.getElementById("ls").innerHTML='<div class="loading">加载失败: '+e.message+'</div>';
+  }
+}
+
+// 日期切换
+document.getElementById("dates").addEventListener("click",function(e){
+  if(e.target.classList.contains("date-btn"))loadDate(e.target.dataset.d);
+});
+
+document.querySelector(".ctl").addEventListener("click",function(e){
+  var b=e.target;
+  if(b.classList.contains("fb")){
+    document.querySelectorAll(".fb").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on");aCh=b.dataset.c;R();
+  }
+  if(b.classList.contains("tb")){
+    if(b.classList.contains("on")){b.classList.remove("on");aTp="";}
+    else{document.querySelectorAll(".tb").forEach(function(x){x.classList.remove("on")});b.classList.add("on");aTp=b.dataset.t;}
+    R();
+  }
+});
+document.getElementById("q").addEventListener("input",function(){sQ=this.value.trim().toLowerCase();R();});
+document.getElementById("ls").addEventListener("click",function(e){
+  if(e.target.tagName==="A"||e.target.closest("a"))return;
+  var it=e.target.closest(".it");
+  if(it)it.classList.toggle("ex");
+});
+
+function mt(item,tp){
+  if(!tp)return true;
+  var kw=TK[tp]||[];
+  var t=((item.title||"")+" "+(item.description||"")+" "+(item.category||"")).toLowerCase();
+  return kw.some(function(k){return t.indexOf(k.toLowerCase())>=0;});
+}
+function esc(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function hl(text,q){
+  var s=esc(text);if(!q)return s;
+  try{var re=new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi");return s.replace(re,'<span class="hl">$1</span>');}
+  catch(e){return s;}
+}
+function R(){
+  var f=D.filter(function(i){
+    if(aCh!=="all"&&i.channel!==aCh)return false;
+    if(!mt(i,aTp))return false;
+    if(sQ){var t=((i.title||"")+" "+(i.description||"")+" "+(i.category||"")+" "+(i.channel||"")).toLowerCase();if(t.indexOf(sQ)<0)return false;}
+    return true;
+  });
+  document.getElementById("cnt").textContent=curDate+" | 显示 "+f.length+" / "+D.length+" 条";
+  var h=f.map(function(i){
+    var tg=CM[i.channel]||i.channel;
+    var desc=i.description||i.first_post||"";
+    var has=desc.length>0||i.link;
+    var d="";
+    if(has){
+      d='<div class="dt">';
+      if(desc)d+='<div class="dx">'+hl(desc,sQ)+'</div>';
+      if(i.link)d+='<a class="dl" href="'+esc(i.link)+'" target="_blank" rel="noopener">查看原文 ↗</a>';
+      d+='</div>';
+    }
+    var mp=[];
+    if(i.date)mp.push(i.date);
+    if(i.category&&i.category!==i.channel)mp.push(i.category);
+    if(i.reply_count)mp.push(i.reply_count+"回复");
+    if(i.likes)mp.push(i.likes+"赞");
+    if(i.comments)mp.push(i.comments+"评论");
+    if(i.author)mp.push(i.author);
+    var m=mp.join(" · ");
+    return '<div class="it"><div class="ih"><span class="tg t-'+tg+'">'+tg+'</span><div style="flex:1"><div class="tt">'+hl(i.title,sQ)+'</div>'+(m?'<div class="mt">'+esc(m)+'</div>':'')+'</div>'+(has?'<span class="ar">›</span>':'')+'</div>'+d+'</div>';
+  }).join("");
+  document.getElementById("ls").innerHTML=h||'<div style="text-align:center;padding:40px;color:#484f58">无匹配内容</div>';
+}
+
+init();
+</script>
+</body>
+</html>
