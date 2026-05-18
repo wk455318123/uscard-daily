@@ -185,9 +185,9 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
     <div class="filter-row">
       <div class="filter-chip on" onclick="filterGroups('all',this)">全部</div>
       <div class="filter-chip" onclick="filterGroups('recommend',this)">✨ 推荐</div>
-      <div class="filter-chip" onclick="filterGroups('card',this)">💳 信用卡</div>
-      <div class="filter-chip" onclick="filterGroups('hotel',this)">🏨 酒店</div>
-      <div class="filter-chip" onclick="filterGroups('travel',this)">✈️ 旅行</div>
+      <div class="filter-chip" onclick="filterGroups('card',this)">📋 业务群</div>
+      <div class="filter-chip" onclick="filterGroups('hotel',this)">🏠 业主群</div>
+      <div class="filter-chip" onclick="filterGroups('travel',this)">🔧 供应商</div>
       <div class="filter-count" id="groupCount">已选 38 / 396</div>
     </div>
     <div class="group-list" id="groupList"></div>
@@ -231,53 +231,54 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
 
 <!-- ═══ INFO PANEL VIEW ═══ -->
 <div id="panelView">
-  <div class="p-hd"><h1>美卡每日信息简报</h1><div class="sub">6大渠道跨平台整合 | 论坛 · 群聊 · 知识星球 · 博客 · 公众号 · 小红书</div>
+  <div class="p-hd"><h1>🏠 家装宝 · 客户群聊日报</h1><div class="sub">微信群聊 + 行业公众号 · AI 智能整理 · 自动推送到钉钉</div>
     <div class="date-bar"><div class="date-btn on">05-08</div><div class="date-btn">05-07</div><div class="date-btn">05-06</div><div class="date-btn">05-05</div><div class="date-btn">05-04</div><div class="date-btn">05-03</div></div>
-    <div class="p-sts"><span class="p-st">论坛 149</span><span class="p-st">群聊 36</span><span class="p-st">星球 20</span><span class="p-st">博客 28</span><span class="p-st">公号 12</span><span class="p-st">共 245 条</span></div>
+    <div class="p-sts"><span class="p-st">群聊 14</span><span class="p-st">公号 4</span><span class="p-st">共 18 条关键信息</span><span class="p-st">已过滤噪音 283 条</span></div>
   </div>
   <div class="p-ctl"><input class="p-sr" placeholder="搜索..." id="panelSearch">
-    <div class="p-fb on" onclick="filterPanel('all',this)">全部</div><div class="p-fb" onclick="filterPanel('论坛',this)">论坛</div><div class="p-fb" onclick="filterPanel('群聊',this)">群聊</div><div class="p-fb" onclick="filterPanel('星球',this)">星球</div><div class="p-fb" onclick="filterPanel('博客',this)">博客</div><div class="p-fb" onclick="filterPanel('公号',this)">公众号</div>
-    <span class="p-sep">|</span><div class="p-tb" onclick="toggleTag(this)" data-t="信用卡">信用卡</div><div class="p-tb" onclick="toggleTag(this)" data-t="航空">航空里程</div><div class="p-tb" onclick="toggleTag(this)" data-t="酒店">酒店旅行</div>
+    <div class="p-fb on" onclick="filterPanel('all',this)">全部</div><div class="p-fb" onclick="filterPanel('群聊',this)">群聊</div><div class="p-fb" onclick="filterPanel('公号',this)">公众号</div>
+    <span class="p-sep">|</span><div class="p-tb" onclick="toggleTag(this)" data-t="施工">施工质量</div><div class="p-tb" onclick="toggleTag(this)" data-t="资金">资金托管</div><div class="p-tb" onclick="toggleTag(this)" data-t="建材">建材供应</div>
   </div>
   <div class="p-cnt" id="panelCnt">2026-05-08 | 显示 245 / 245 条</div>
   <div class="p-ls" id="panelList"></div>
-  <div class="p-footer">Powered by PulseAI + 小米 MiMo AI | 数据每日自动更新</div>
+  <div class="p-footer">Powered by PulseAI + 小米 MiMo AI | 家装宝业务 · 每日自动推送到钉钉</div>
 </div>
 
 <script>
 // ═══ MOCK DATA ═══
 var GROUPS=[
-{n:"IATA和ITIN的美卡酒店群",c:"card",r:1},{n:"外卡群",c:"card",r:1},{n:"青蛙飞旅1️⃣美卡高阶群➊",c:"card",r:1},{n:"青蛙飞旅1️⃣美卡进阶群➋",c:"card",r:1},{n:"蛙蛙飞旅2️⃣ITIN 美卡群➌",c:"card",r:1},{n:"卡权益交流群",c:"card",r:1},{n:"撸卡交流群",c:"card",r:1},{n:"365玩卡社群C23",c:"card",r:1},{n:"Lemfi x 美卡101 福利群",c:"card",r:1},{n:"新白金权益交流群",c:"card",r:1},{n:"浦发高端卡8群",c:"card",r:1},{n:"招行经典白",c:"card",r:1},{n:"农行大白金5群",c:"card",r:1},{n:"北京银行江浙沪互通",c:"card",r:1},{n:"中信银行信用卡杭州福利群",c:"card",r:1},{n:"高端卡变现",c:"card",r:1},
-{n:"陈先生希尔顿1群",c:"hotel",r:1},{n:"陈先生常旅客福利6群",c:"hotel",r:1},{n:"聪明旅行x凯悦",c:"hotel",r:1},{n:"聪明旅行x雅高",c:"hotel",r:1},{n:"聪明旅行x IHG",c:"hotel",r:1},{n:"就爱住雅高Accor Hotels",c:"hotel",r:1},{n:"酒店控手札讨论33群",c:"hotel",r:1},{n:"酒店玩家群",c:"hotel",r:1},{n:"青蛙飞旅5️⃣酒店会员群➊",c:"hotel",r:1},{n:"好看商店-万豪旅享家交流群",c:"hotel",r:1},
-{n:"Safari玩咖俱乐部",c:"travel",r:1},{n:"燃烧的里程讨论群",c:"travel",r:1},{n:"机酒卡官方29群",c:"travel",r:1},{n:"聪明旅行6⃣️",c:"travel",r:1},{n:"互友旅行上海群3",c:"travel",r:1},{n:"生活家老杨旅行6群",c:"travel",r:1},
-{n:"聪明的投资者慢慢变富",c:"invest",r:1},{n:"投资交流讨论群",c:"invest",r:1},{n:"悟空银行存款交流群",c:"invest",r:0},
-{n:"传说中的昆白组合",c:"other",r:0},{n:"大盘鸡",c:"other",r:0},{n:"上海产品经理群",c:"other",r:0},{n:"42章经聊天群",c:"other",r:0},{n:"AI山脉AIGC交流群",c:"other",r:0},{n:"人人都是产品经理",c:"other",r:0},{n:"杭州房圈",c:"other",r:0},{n:"都吃草",c:"other",r:0},{n:"天津",c:"other",r:0},{n:"K12主题",c:"other",r:0}
+// 客户群
+{n:"家装宝-客户服务群",c:"card",r:1},{n:"装企-资金托管沟通群",c:"card",r:1},{n:"支付宝&轩怡 资金托管",c:"card",r:1},{n:"支付宝&轩怡（家装宝产品对接）",c:"card",r:1},{n:"支付宝&众安装修保险对焦",c:"card",r:1},{n:"线索平台-工长反馈群",c:"card",r:1},{n:"家装宝CRM客户跟进群",c:"card",r:1},{n:"装修保险理赔对接群",c:"card",r:1},{n:"家装宝-杭州运营内部群",c:"card",r:1},
+// 业主群
+{n:"兴耀玉珊瑚业主1️⃣群",c:"hotel",r:1},{n:"玉珊瑚4幢业主群",c:"hotel",r:1},{n:"合景天峻3幢业主群",c:"hotel",r:1},{n:"宜居-合景天峻验房团购群",c:"hotel",r:1},{n:"合景天峻·邻里广场",c:"hotel",r:0},
+// 供应商
+{n:"索柏莱定制&系统柜-玉珊瑚项目",c:"travel",r:1},{n:"【玉珊瑚】柏菲伦全案设计服务群",c:"travel",r:1},{n:"玉珊瑚菲林格尔地暖地板团购群",c:"travel",r:1},{n:"🔥玉珊瑚&喜临门星河净眠团购",c:"travel",r:1},{n:"🌺玉珊瑚 琪美灯具工厂店团购群",c:"travel",r:1},{n:"玉珊瑚银河窗帘墙布二十年老店",c:"travel",r:1},{n:"玉珊瑚_盛师傅全屋定制服务群",c:"travel",r:1},{n:"大师傅阳台改造【玉珊瑚】",c:"travel",r:1},{n:"叁竹-玉珊瑚设计服务群全案",c:"travel",r:1},{n:"玉珊瑚海尔卡萨帝团购群",c:"travel",r:1},{n:"日門築家定制🐘玉珊瑚府团购群",c:"travel",r:0},{n:"BM家居-兴耀·玉珊瑚",c:"travel",r:0},{n:"三棵树艺术漆（玉珊瑚）团购群",c:"travel",r:0},
+// 其他
+{n:"玉珊瑚-祁师傅阳台服务群",c:"invest",r:0},{n:"杭曜美缝玉珊瑚团购福利群",c:"invest",r:0},{n:"⭕玉珊瑚圈姐跑盘交流群",c:"other",r:0},{n:"川洋家具源头工厂玉珊瑚团购群",c:"other",r:0},{n:"慕思V6家居&玉珊瑚专属服务群",c:"other",r:0},{n:"玉珊瑚招商-柯索阳台柜整装",c:"other",r:0},{n:"7310艺术软装玉珊瑚窗帘团购群",c:"other",r:0},{n:"玉珊瑚包阳台意向沟通群",c:"other",r:0},{n:"叁竹-玉珊瑚4-2-1501定制设计",c:"other",r:0},{n:"玉珊瑚&芒果立方团购设计沟通群",c:"other",r:0},{n:"卡百利艺术漆团购群-玉珊瑚",c:"other",r:0},{n:"皇氏工匠美缝~玉珊瑚服务群",c:"other",r:0},{n:"绿城门禁iTAP杭州项目沟通群",c:"other",r:0}
 ];
 var MPS=[
-{n:"猫笔刀",d:"美卡攻略·航旅积分"},{n:"美卡指南",d:"信用卡申请与权益"},{n:"常旅客笔记",d:"酒店航空里程"},{n:"信用卡世界",d:"信用卡资讯"},{n:"航旅纵横",d:"航班动态与里程"},{n:"酒店控手札",d:"酒店权益深度测评"},{n:"旅行雷达",d:"特价机酒与旅行攻略"},{n:"撸卡日记",d:"信用卡薅羊毛"},{n:"飞客茶馆",d:"常旅客社区"},{n:"里程家",d:"航空里程兑换"},{n:"卡圈那些事",d:"信用卡行业动态"},{n:"积分大师",d:"积分兑换最优解"},{n:"外卡玩家",d:"国际信用卡"},{n:"银行观察",d:"银行政策与产品"},{n:"长桥海豚投研",d:"港美股分析"},{n:"半佛仙人",d:"金融商业评论"},{n:"远川投资评论",d:"宏观投资分析"},{n:"虎嗅APP",d:"科技商业资讯"},{n:"晚点LatePost",d:"科技行业深度"},{n:"差旅通",d:"商旅管理"},{n:"云游四方",d:"旅行见闻与攻略"},{n:"刷卡研习社",d:"刷卡返现策略"},{n:"投资客日记",d:"海外投资理财"},{n:"小声比比",d:"互联网观察"}
+{n:"装修情报",d:"装修行业资讯·政策解读"},{n:"好好住",d:"家居装修灵感与案例"},{n:"住范儿",d:"装修避坑指南"},{n:"家装下午茶",d:"家装行业深度分析"},{n:"设计本",d:"室内设计师平台"},{n:"一兜糖家居",d:"装修经验分享社区"},{n:"装小蜜",d:"第三方装修监理"},{n:"建E室内设计",d:"设计趋势与案例"},{n:"PChouse太平洋家居",d:"家居行业媒体"},{n:"筑客HOME",d:"高端家装案例"},{n:"装修33天",d:"装修日记与避坑"},{n:"ELLEDECO家居廊",d:"家居设计美学"},{n:"杭州装修指南",d:"杭州本地装修资讯"},{n:"家装保险观察",d:"装修保险行业动态"},{n:"建材价格通",d:"建材市场行情"},{n:"全屋定制研究",d:"定制家居行业分析"},{n:"智能家居前沿",d:"智能家装趋势"},{n:"家居新范式",d:"家居新零售观察"}
 ];
 var ITEMS=[
-{ch:"论坛",tg:"论坛",t:"Chase Sapphire Preferred 80k 开卡奖励回归，年费 $95 不变",m:"信用卡 · 23回复",d:"CSP 80k 奖励再次回归，通过 Chase 官网可以直接申请。年费保持 $95 不变，相比 CSR 的 $550 更适合入门玩家。"},
-{ch:"群聊",tg:"群聊",t:"聪明旅行x凯悦：年底前凯悦积分兑换贬值 15%，建议尽早兑换",m:"酒店旅行 · Safari玩咖俱乐部",d:"群里讨论凯悦 2026 年底前会对积分兑换表进行调整，部分酒店 off-peak 价格上涨约 15%。"},
-{ch:"公号",tg:"公号",t:"猫笔刀：Amex Platinum 年费涨到 $799，还值得持有吗？",m:"信用卡 · 猫笔刀",d:"Amex Platinum 年费从 $695 涨到 $799，但新增了 $200 旅行信用和 Uber 额度提升。综合权益仍然是高端卡中最全面的。"},
-{ch:"群聊",tg:"群聊",t:"IATA美卡群：BOA Premium Rewards NLL 链接复活",m:"信用卡 · IATA和ITIN的美卡酒店群",d:"BOA PR NLL 链接在今天上午复活，据群友反馈不查 5/24，有需要的可以尝试。"},
-{ch:"星球",tg:"星球",t:"United MileagePlus 里程闪促：兑换日本经济舱低至 15000 里程",m:"航空里程 · 15赞",d:"United 发起日本航线里程闪促，经济舱最低 15000 里程，商务舱 50000 里程起。"},
-{ch:"博客",tg:"博客",t:"2026 年美卡开卡顺序推荐：从入门到高端的最优路线",m:"信用卡 · ThePointsGuy",d:"详细介绍从零开始的开卡策略，建议从 Chase 5/24 开始，再转向 Amex 和 Citi。"},
-{ch:"群聊",tg:"群聊",t:"撸卡交流群：Citi Custom Cash 5% 杂货类已更新至 Q3",m:"信用卡 · 撸卡交流群",d:"Citi CC 的 5% 返现类别 Q3 为杂货店，搭配 Amex Gold 4x 可以最大化返现。"},
-{ch:"论坛",tg:"论坛",t:"万豪 Bonvoy Brilliant 升级至 185k 欢迎奖励",m:"酒店旅行 · 18回复",d:"万豪 Bonvoy Brilliant 卡提升开卡奖励至 185k 积分，附带 $300 餐饮信用。"},
-{ch:"公号",tg:"公号",t:"酒店控手札：2026 亚太希尔顿新开业酒店盘点",m:"酒店旅行 · 酒店控手札",d:"2026 年亚太区希尔顿将新开超过 30 家酒店，重点推荐东京 Conrad 和京都 Waldorf Astoria。"},
-{ch:"群聊",tg:"群聊",t:"外卡群：HSBC UK Premier 开户最新攻略",m:"信用卡 · 外卡群",d:"群友分享 HSBC UK 远程开户流程，需要英国地址证明和最低 £75k 存款。"},
-{ch:"论坛",tg:"论坛",t:"Alaska 里程闪促买一送一，每里程低至 1.1 美分",m:"航空里程 · 12回复",d:"Alaska 航空推出里程购买促销，买满 40000 里程送 40000，相当于 1.1 美分/里程。"},
-{ch:"星球",tg:"星球",t:"Capital One Venture X 商务版正式上线，年费 $395",m:"信用卡 · 8赞",d:"Capital One 推出 Venture X Business 卡，2x 全返现 + 100k 开卡奖励。"},
-{ch:"博客",tg:"博客",t:"如何利用 Amex Offer 每年省下 $2000+",m:"信用卡 · 美卡指南",d:"系统性介绍如何叠加使用 Amex Offer，包括多卡添加、小额触发和高价值 offer 筛选。"},
-{ch:"群聊",tg:"群聊",t:"酒店玩家群：Park Hyatt 东京积分房最新可用日期",m:"酒店旅行 · 酒店玩家群",d:"群友发现 Park Hyatt Tokyo 12 月有积分房释出，25000 点/晚。"},
-{ch:"红书",tg:"红书",t:"分享｜用 50 万里程兑换国泰商务舱环球票全攻略",m:"航空里程 · 328赞",d:"详细记录了用 Alaska 和 Cathay 里程拼出环球商务舱的完整过程。"},
-{ch:"公号",tg:"公号",t:"旅行雷达：暑期东南亚机票低价汇总",m:"航空里程 · 旅行雷达",d:"暑期东南亚航线低价汇总：上海-曼谷 ¥1200 往返，北京-吉隆坡 ¥1500 往返。"},
-{ch:"论坛",tg:"论坛",t:"Discover it 改版：首年双倍返现取消，新增 5% 流媒体类别",m:"信用卡 · 9回复",d:"Discover it 取消首年双倍返现，但新增流媒体订阅 5% 返现类别。"},
-{ch:"群聊",tg:"群聊",t:"高端卡变现群：Centurion Lounge 新增 3 个机场",m:"信用卡 · 高端卡变现",d:"Amex Centurion Lounge 2026 年新增 SFO T3、JFK T4 和 LAX 国际航站楼。"},
-{ch:"星球",tg:"星球",t:"IHG 积分贬值预警：2026 下半年动态定价全面铺开",m:"酒店旅行 · 12赞",d:"IHG 将在 2026 下半年全面推行动态定价，预计积分兑换成本上升 20-30%。"},
-{ch:"博客",tg:"博客",t:"完整对比：CSR vs Amex Platinum vs Capital One VX",m:"信用卡 · 撸卡日记",d:"三张顶级旅行卡的全方位对比，包括年费、返现、权益和里程转点伙伴。"},
-{ch:"群聊",tg:"群聊",t:"燃烧的里程：Delta SkyMiles 贬值确认，明年起经济舱涨至 15k",m:"航空里程 · 燃烧的里程讨论群",d:"Delta 确认 2027 年起国内经济舱兑换从 12500 涨至 15000 里程。"}
+{ch:"群聊",tg:"群聊",t:"线索平台-工长反馈群：客户王先生投诉施工质量，要求全额退款",m:"施工质量 · 线索平台-工长反馈群",d:"工长反馈客户王先生对卫生间瓷砖铺贴不满意，存在空鼓现象，客户情绪激动要求退款。需要 24 小时内安排返工方案。"},
+{ch:"群聊",tg:"群聊",t:"装企资金托管群：3 单水电验收已通过，申请释放托管资金",m:"资金托管 · 支付宝&轩怡 资金托管",d:"轩怡装修本批 3 个订单（#2026-0512、#2026-0513、#2026-0515）水电验收节点已通过，累计托管金额 ¥18.6 万，申请释放至装企账户。"},
+{ch:"公号",tg:"公号",t:"装修情报：2026 下半年建材价格走势预测，板材或涨 15%",m:"行业趋势 · 装修情报",d:"受上游原材料和物流成本影响，2026 下半年板材类建材预计涨价 10-15%，建议提前锁定采购价格，尤其是全屋定制项目。"},
+{ch:"群聊",tg:"群聊",t:"柏菲伦全案设计群：5 月第二批集中量房完成 12 户，设计方案陆续出稿",m:"设计进度 · 【玉珊瑚】柏菲伦全案设计服务群",d:"本批 12 户集中量房已全部完成，设计师正在出方案。预计下周一可以开始客户确认会，请各群主协调客户时间。"},
+{ch:"群聊",tg:"群聊",t:"琪美灯具工厂店延期 2 周，15 户客户受影响，1 户威胁投诉 12315",m:"供应商延期 · 🌺玉珊瑚 琪美灯具工厂店团购群",d:"琪美灯具因生产线故障导致延期，已影响 15 户客户，其中李先生情绪非常激动。建议：①联系工厂确认最终交期 ②准备备选供应商 ③对李先生发补偿方案。"},
+{ch:"公号",tg:"公号",t:"住范儿：全屋定制避坑清单，这 8 个问题签合同前一定要问",m:"装修知识 · 住范儿",d:"签定制合同前必须确认的 8 个问题：板材品牌和等级、五金品牌、设计费是否包含、超尺费用计算方式、工期延误违约金、售后保修范围等。"},
+{ch:"群聊",tg:"群聊",t:"喜临门星河净眠本批 35 套床垫到仓，可安排 5/19-5/22 集中配送",m:"到货通知 · 🔥玉珊瑚&喜临门星河净眠团购",d:"本批 35 套床垫已到杭州仓库，建议分 4 天配送安装。请各群确认客户在家时间，统一排期。"},
+{ch:"群聊",tg:"群聊",t:"众安装修保险：本月已出 23 单，理赔 0 单，客户转化率 68%",m:"保险数据 · 支付宝&众安装修保险对焦",d:"装修保险 5 月数据：出单 23 笔，保费收入 ¥4.6 万，理赔 0 笔，转化率 68%（高于行业均值 45%）。建议继续在签约环节植入推荐。"},
+{ch:"群聊",tg:"群聊",t:"玉珊瑚业主群：本周六集中验房，已报名 18 户，需协调 3 位验房师",m:"验房安排 · 兴耀玉珊瑚业主1️⃣群",d:"周六下午 2 点集中验房，报名 18 户。需要 3 位验房师（已联系宜居）和 1 位水电师傅配合。请确认场地和动线安排。"},
+{ch:"公号",tg:"公号",t:"家装下午茶：支付宝家装宝资金托管模式解读，装企如何受益",m:"行业分析 · 家装下午茶",d:"深度解读支付宝家装宝资金托管模式：按节点释放资金保障业主权益，同时给装企提供确定性回款周期。文章分析了目前合作的 5 种节点拆分方案。"},
+{ch:"群聊",tg:"群聊",t:"菲林格尔地暖地板第三期报价确认：实木复合 ¥289/㎡，比市场低 28%",m:"团购价格 · 玉珊瑚菲林格尔地暖地板团购群",d:"第三期团购价已确认，实木复合地暖地板 ¥289/㎡（市场价 ¥399），强化复合 ¥168/㎡。本批限 20 户，先到先得。"},
+{ch:"群聊",tg:"群聊",t:"盛师傅全屋定制：3-1-802 橱柜安装完成，验收合格，可触发尾款释放",m:"验收完成 · 玉珊瑚_盛师傅全屋定制服务群",d:"王女士家橱柜安装完毕，台面对缝、柜门铰链、抽屉滑轨均检验合格。客户已签字确认，可触发家装宝尾款释放流程。"},
+{ch:"群聊",tg:"群聊",t:"索柏莱定制系统柜：本周测量排期已满，新增 3 户需排到下周",m:"排期延后 · 索柏莱定制&系统柜-玉珊瑚项目",d:"本周 8 户测量排期已满，新增的张女士、李先生、周女士 3 户需排到下周一至周三。请告知客户并确认时间。"},
+{ch:"公号",tg:"公号",t:"建材价格通：5 月杭州建材市场月报，定制板材均价上涨 8%",m:"市场行情 · 建材价格通",d:"5 月杭州建材市场价格月报：板材类均价上涨 8%，瓷砖持平，卫浴五金小幅下降 3%。全屋定制报价建议及时调整。"},
+{ch:"群聊",tg:"群聊",t:"家装宝产品对接群：轩怡侧希望增加施工进度照片上传功能",m:"产品需求 · 支付宝&轩怡（家装宝产品对接）",d:"轩怡装修反馈希望在家装宝小程序中增加施工进度照片上传功能，方便业主远程查看装修进展。建议纳入 Q3 迭代计划。"},
+{ch:"群聊",tg:"群聊",t:"大师傅阳台改造：本月已完成 8 户封窗，还有 5 户待排期",m:"施工统计 · 大师傅阳台改造【玉珊瑚】",d:"5 月封窗进度：已完成 8 户，在施 2 户，待排期 5 户。断桥铝型材库存充足，预计月底可全部完成。"},
+{ch:"群聊",tg:"群聊",t:"4 幢业主群：多位业主反馈装修噪音大，要求物业限制施工时段",m:"物业协调 · 玉珊瑚4幢业主群",d:"3 位业主联合反馈装修噪音影响休息，建议与物业协调统一施工时段：工作日 9:00-12:00、14:00-18:00，周末禁止施工。"},
+{ch:"群聊",tg:"群聊",t:"银河窗帘墙布：第四批 15 户测量完成，面料样品寄出中",m:"测量进度 · 玉珊瑚银河窗帘墙布二十年老店",d:"第四批 15 户窗帘测量已完成，面料样品已通过顺丰寄出，预计 2 天到达。请提醒客户查收并确认花色。"},
+{ch:"公号",tg:"公号",t:"全屋定制研究：2026 定制家居行业趋势，极简轻奢风占比超 40%",m:"行业趋势 · 全屋定制研究",d:"2026 年定制家居设计风格趋势：极简轻奢风格占比从去年的 28% 上升至 42%，奶油风紧随其后占 25%，传统中式下降至 8%。"}
 ];
 
 var selG=new Set(),selMP=new Set(),step=0,gFilter='all';
@@ -291,7 +292,7 @@ function updateUI(){document.querySelectorAll('.panel').forEach(function(p,i){p.
 
 function startAuth(type){var modal=document.getElementById('qrModal');modal.classList.add('show');document.getElementById('modalIcon').textContent=type==='wechat'?'💬':'📖';document.getElementById('modalTitle').textContent=type==='wechat'?'微信本地连接':'微信读书扫码登录';document.getElementById('modalHint').textContent=type==='wechat'?'正在检测微信客户端并解密数据库...':'请使用微信扫描二维码';setTimeout(function(){modal.classList.remove('show');var card=document.getElementById(type==='wechat'?'authWechat':'authWeread');card.classList.add('connected');card.querySelector('.auth-status').textContent=type==='wechat'?'✓ 已连接 (396 个群)':'✓ 已登录（Cookie 有效）'},2500)}
 
-function renderGroups(q){q=(q||'').toLowerCase();var list=document.getElementById('groupList'),html='';GROUPS.forEach(function(g,i){if(gFilter==='recommend'&&!g.r)return;if(gFilter!=='all'&&gFilter!=='recommend'&&g.c!==gFilter)return;if(q&&g.n.toLowerCase().indexOf(q)<0)return;var s=selG.has(i)?'selected':'';var cl={card:'信用卡',hotel:'酒店',travel:'旅行',invest:'投资'}[g.c]||'';var bc={card:'badge-card',hotel:'badge-hotel',travel:'badge-travel',invest:'badge-invest'}[g.c]||'';html+='<div class="group-item '+s+'" data-idx="'+i+'" onclick="toggleG('+i+')"><div class="group-check">✓</div><div class="group-name">'+esc(g.n)+'</div>'+(cl?'<div class="group-badge '+bc+'">'+cl+'</div>':'')+(g.r?'<div class="group-badge" style="background:#f59e0b18;color:#f59e0b">推荐</div>':'')+'</div>'});list.innerHTML=html||'<div style="padding:32px;text-align:center;color:var(--text-muted)">无匹配</div>';document.getElementById('groupCount').textContent='已选 '+selG.size+' / '+GROUPS.length}
+function renderGroups(q){q=(q||'').toLowerCase();var list=document.getElementById('groupList'),html='';GROUPS.forEach(function(g,i){if(gFilter==='recommend'&&!g.r)return;if(gFilter!=='all'&&gFilter!=='recommend'&&g.c!==gFilter)return;if(q&&g.n.toLowerCase().indexOf(q)<0)return;var s=selG.has(i)?'selected':'';var cl={card:'业务群',hotel:'业主群',travel:'供应商',invest:'其他'}[g.c]||'';var bc={card:'badge-card',hotel:'badge-hotel',travel:'badge-travel',invest:'badge-invest'}[g.c]||'';html+='<div class="group-item '+s+'" data-idx="'+i+'" onclick="toggleG('+i+')"><div class="group-check">✓</div><div class="group-name">'+esc(g.n)+'</div>'+(cl?'<div class="group-badge '+bc+'">'+cl+'</div>':'')+(g.r?'<div class="group-badge" style="background:#f59e0b18;color:#f59e0b">推荐</div>':'')+'</div>'});list.innerHTML=html||'<div style="padding:32px;text-align:center;color:var(--text-muted)">无匹配</div>';document.getElementById('groupCount').textContent='已选 '+selG.size+' / '+GROUPS.length}
 function toggleG(i){if(selG.has(i))selG.delete(i);else selG.add(i);var el=document.querySelector('.group-item[data-idx="'+i+'"]');if(el)el.classList.toggle('selected');document.getElementById('groupCount').textContent='已选 '+selG.size+' / '+GROUPS.length}
 function filterGroups(f,el){gFilter=f;document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('on')});el.classList.add('on');renderGroups(document.getElementById('groupSearch').value)}
 function bulkSelect(m){if(m==='none')selG.clear();else if(m==='rec'){selG.clear();GROUPS.forEach(function(g,i){if(g.r)selG.add(i)})}else{document.querySelectorAll('.group-item').forEach(function(el){selG.add(parseInt(el.dataset.idx))})}renderGroups(document.getElementById('groupSearch').value)}
@@ -306,7 +307,7 @@ document.querySelectorAll('.time-slot').forEach(function(s){s.addEventListener('
 // ═══ INFO PANEL ═══
 var pFilter='all',pTag='';
 function showPanel(){document.getElementById('setupView').style.display='none';document.getElementById('panelView').style.display='block';renderPanel()}
-function renderPanel(){var q=(document.getElementById('panelSearch')||{}).value||'';q=q.toLowerCase();var CM={论坛:'论坛',群聊:'群聊',星球:'星球',博客:'博客',公号:'公号',红书:'红书'};var TK={信用卡:['信用卡','美卡','开卡','amex','chase','citi','返现','积分','bonus'],航空:['里程','航空','united','delta','alaska','mile','商务舱','机票'],酒店:['酒店','hotel','hyatt','hilton','marriott','ihg','凯悦','希尔顿','万豪']};
+function renderPanel(){var q=(document.getElementById('panelSearch')||{}).value||'';q=q.toLowerCase();var CM={论坛:'论坛',群聊:'群聊',星球:'星球',博客:'博客',公号:'公号',红书:'红书'};var TK={施工:['施工','验收','水电','瓷砖','安装','返工','质量','封窗','阳台'],资金:['资金','托管','放款','释放','保险','理赔','尾款','保费'],建材:['建材','板材','地板','灯具','窗帘','定制','橱柜','瓷砖','五金','家具']};
 var f=ITEMS.filter(function(it){if(pFilter!=='all'&&CM[it.ch]!==pFilter)return false;if(pTag){var kw=TK[pTag]||[];var txt=(it.t+' '+it.d).toLowerCase();if(!kw.some(function(k){return txt.indexOf(k.toLowerCase())>=0}))return false}if(q&&(it.t+' '+it.d).toLowerCase().indexOf(q)<0)return false;return true});
 document.getElementById('panelCnt').textContent='2026-05-08 | 显示 '+f.length+' / '+ITEMS.length+' 条';
 var html=f.map(function(it){return'<div class="p-it" onclick="this.classList.toggle(\'ex\')"><div class="p-ih"><span class="p-tg t-'+it.tg+'">'+it.tg+'</span><div style="flex:1"><div class="p-tt">'+esc(it.t)+'</div><div class="p-mt">'+esc(it.m)+'</div></div><span class="p-ar">›</span></div><div class="p-dt"><div class="p-dx">'+esc(it.d)+'</div></div></div>'}).join('');
