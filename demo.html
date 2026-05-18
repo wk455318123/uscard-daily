@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PulseAI Demo — 私有微信群智能秘书</title>
+<title>群晓 Demo — 私有微信群智能秘书</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -155,7 +155,7 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
 <!-- ═══ SETUP VIEW ═══ -->
 <div id="setupView">
 <div class="shell">
-  <div class="logo"><div class="logo-icon">⚡</div><div class="logo-text">Pulse AI<span>Setup Wizard</span></div></div>
+  <div class="logo"><div class="logo-icon">⚡</div><div class="logo-text">群晓<span>Setup Wizard</span></div></div>
   <div class="steps-bar" id="stepsBar">
     <div class="step-node active" data-step="0"><div class="step-dot">1</div><div class="step-label">授权连接</div></div>
     <div class="step-line"></div>
@@ -170,7 +170,7 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
 
   <div class="panel visible" id="p0">
     <div class="panel-title">连接你的数据源</div>
-    <div class="panel-subtitle">Pulse AI 需要连接微信和微信读书来获取群聊消息与公众号文章。<br>所有数据均在本地处理，不会上传到任何服务器。</div>
+    <div class="panel-subtitle">群晓 需要连接微信和微信读书来获取群聊消息与公众号文章。<br>所有数据均在本地处理，不会上传到任何服务器。</div>
     <div class="auth-grid">
       <div class="auth-card" id="authWechat" onclick="startAuth('wechat')"><div class="auth-icon">💬</div><div class="auth-name">微信群聊</div><div class="auth-desc">解密本地微信数据库，提取群聊消息</div><div class="auth-status">点击连接</div></div>
       <div class="auth-card" id="authWeread" onclick="startAuth('weread')"><div class="auth-icon">📖</div><div class="auth-name">微信读书</div><div class="auth-desc">通过微信读书获取公众号文章内容</div><div class="auth-status">点击连接</div></div>
@@ -217,7 +217,7 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
   </div>
 
   <div class="panel" id="p4">
-    <div class="done-card"><span class="done-icon">🚀</span><div class="done-title">配置完成！</div><div class="done-desc">Pulse AI 已准备就绪。系统将自动从选定的群聊和公众号中<br>提取信息并生成 AI 摘要。</div>
+    <div class="done-card"><span class="done-icon">🚀</span><div class="done-title">配置完成！</div><div class="done-desc">群晓 已准备就绪。系统将自动从选定的群聊和公众号中<br>提取信息并生成 AI 摘要。</div>
       <div class="done-stats"><div><div class="done-stat-num" id="doneGroups">38</div><div class="done-stat-label">监控群聊</div></div><div><div class="done-stat-num" id="doneMps">12</div><div class="done-stat-label">追踪公众号</div></div><div><div class="done-stat-num" id="doneTimes">3</div><div class="done-stat-label">每日推送</div></div></div>
       <button class="btn btn-success" onclick="showPanel()">打开信息面板 →</button>
     </div>
@@ -241,7 +241,7 @@ body::after{content:'';position:fixed;bottom:-30%;right:-10%;width:60vw;height:6
   </div>
   <div class="p-cnt" id="panelCnt">2026-05-08 | 显示 245 / 245 条</div>
   <div class="p-ls" id="panelList"></div>
-  <div class="p-footer">Powered by PulseAI + 小米 MiMo AI | 家装宝业务 · 每日自动推送到钉钉</div>
+  <div class="p-footer">Powered by 群晓 + 小米 MiMo AI | 家装宝业务 · 每日自动推送到钉钉</div>
 </div>
 
 <script>
