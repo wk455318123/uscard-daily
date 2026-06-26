@@ -137,7 +137,7 @@ async function loadDate(ds){
     // 统计
     var ch={};
     D.forEach(function(i){ch[i.channel]=(ch[i.channel]||0)+1;});
-    var sh=Object.entries(ch).map(function(e){return '<span class="st">'+CM[e[0]]||e[0]+' '+e[1]+'</span>';}).join("");
+    var sh=Object.entries(ch).map(function(e){return '<span class="st">'+(CM[e[0]]||e[0])+' '+e[1]+'</span>';}).join("");
     sh+='<span class="st">共 '+D.length+' 条</span>';
     document.getElementById("stats").innerHTML=sh;
 
@@ -215,7 +215,9 @@ function R(){
   document.getElementById("ls").innerHTML=h||'<div style="text-align:center;padding:40px;color:#484f58">无匹配内容</div>';
 }
 
-init();
+init().catch(function(e){
+  document.getElementById("ls").innerHTML='<div class="loading">初始化失败: '+e.message+'<br><br>请尝试在浏览器中直接打开此链接</div>';
+});
 </script>
 </body>
 </html>
