@@ -50,6 +50,18 @@ body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,"Hiragino Sans G
 .hl{background:#d2992244;padding:1px 2px;border-radius:2px}
 .sep{color:#30363d;margin:0 4px}
 .loading{text-align:center;padding:60px;color:#484f58;font-size:14px}
+.summary-view{padding:8px 0;line-height:1.8;color:#c9d1d9}
+.sm-h1{color:#e94560;font-size:20px;margin:20px 0 12px;padding-bottom:8px;border-bottom:1px solid #21262d}
+.sm-h2{color:#58a6ff;font-size:16px;margin:18px 0 8px}
+.sm-bold{color:#c9d1d9;font-size:14px;font-weight:600;margin:10px 0 4px}
+.sm-li{color:#8b949e;font-size:13px;padding-left:16px;margin:3px 0;line-height:1.7}
+.sm-li:before{content:"";display:inline-block;width:4px;height:4px;background:#484f58;border-radius:50%;margin-right:8px;margin-left:-12px;vertical-align:middle}
+.sm-p{color:#8b949e;font-size:13px;margin:3px 0;line-height:1.7}
+.summary-view hr{border:none;border-top:1px solid #21262d;margin:16px 0}
+.summary-view strong{color:#d29922}
+.fb-sum{background:#e9456033;border:1px solid #e9456066;color:#e94560}
+.fb-sum:hover{border-color:#e94560;color:#e94560}
+.fb-sum.on{background:#e9456044;border-color:#e94560;color:#e94560}
 .footer{text-align:center;padding:20px;color:#30363d;font-size:11px;border-top:1px solid #21262d;margin-top:20px}
 </style>
 </head>
@@ -62,7 +74,8 @@ body{background:#0d1117;color:#c9d1d9;font-family:-apple-system,"Hiragino Sans G
 </div>
 <div class="ctl">
 <input class="sr" type="text" placeholder="搜索..." id="q">
-<button class="fb on" data-c="all">全部</button>
+<button class="fb fb-sum on" data-c="summary">今日汇总</button>
+<button class="fb" data-c="all">全部</button>
 <button class="fb" data-c="美卡论坛">论坛</button>
 <button class="fb" data-c="微信群聊">群聊</button>
 <button class="fb" data-c="知识星球">星球</button>
