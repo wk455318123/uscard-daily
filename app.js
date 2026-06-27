@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function(){
+
 var CM={"美卡论坛":"论坛","知识星球":"星球","美卡博客":"博客","公众号":"公号","小红书":"红书","微信群聊":"群聊"};
 var TK={"信用卡":["信用卡","美卡","开卡","amex","chase","citi","boa","nll","返现","积分","bonus","offer","platinum","gold","aspire","csr","bilt","refer"],"航空":["里程","航空","united","delta","alaska","mile","fly","aeroplan","商务舱","机票","航班","南航","国航"],"酒店":["酒店","hotel","hyatt","hilton","marriott","ihg","凯悦","希尔顿","万豪","雅高","度假","fhr","resort","club med"],"银行":["银行","bank","checking","saving","开户","sofi","chime","报税","理财","投资","plaid"],"风控":["封","block","盗刷","风控","4506","kyc","拒","冻结","风险","预警"]};
 
@@ -130,3 +132,5 @@ function R(){
 init().catch(function(e){
   document.getElementById("ls").innerHTML='<div class="loading">初始化失败: '+e.message+'</div>';
 });
+
+}); // end DOMContentLoaded
