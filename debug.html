@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>debug</title></head>
+<body style="background:#111;color:#ccc;font-family:monospace;padding:20px">
+<pre id="log">starting debug...\n</pre>
+<script>
+var el=document.getElementById("log");
+function log(msg){el.textContent+=msg+"\n";}
+
+async function debug(){
+  log("1. testing fetch manifest...");
+  try{
+    var r=await fetch("data/manifest.json");
+    log("   status: "+r.status);
+    var manifest=await r.json();
+    log("   dates: "+manifest.length+" -> "+manifest.slice(0,3).join(", "));
+  }catch(e){
+    log("   ERROR: "+e.message);
+    return;
+  }
+
+  log("2. testing fetch data file: "+manifest[0]+"...");
+  try{
+    var r2=await fetch("data/"+manifest[0]+".json");
+    log("   status: "+r2.status);
+    var data=await r2.json();
+    log("   items: "+data.length);
+    log("   first: "+JSON.stringify(data[0]).substring(0,100));
+  }catch(e){
+    log("   ERROR: "+e.message);
+    return;
+  }
+
+  log("3. testing app.js load...");
+  try{
+    var r3=await fetch("app.js");
+    log("   status: "+r3.status);
+    var txt=await r3.text();
+    log("   length: "+txt.length+" chars");
+    log("   starts with: "+txt.substring(0,30));
+    log("   contains init: "+(txt.indexOf("function init")>=0));
+    log("   contains R(): "+(txt.indexOf("function R(")>=0));
+  }catch(e){
+    log("   ERROR: "+e.message);
+    return;
+  }
+
+  log("4. testing DOM elements...");
+  var ids=["dates","stats","ls","cnt","q"];
+  ids.forEach(function(id){
+    var found=document.getElementById(id);
+    log("   #"+id+": "+(found?"OK":"MISSING"));
+  });
+
+  log("5. testing querySelector('.ctl')...");
+  var ctl=document.querySelector(".ctl");
+  log("   .ctl: "+(ctl?"OK":"MISSING"));
+
+  log("\n=== DONE ===");
+  log("If all above OK, the issue is in app.js runtime execution.");
+  log("Check browser console (F12) for errors.");
+}
+debug();
+</script>
+</body></html>
